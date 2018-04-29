@@ -1,0 +1,103 @@
+<html>
+<head>
+<title>1337 translator</title>
+</head>
+<body style="background: black;">
+
+<script>
+
+//https://simple.wikipedia.org/wiki/Leet
+//https://en.wikipedia.org/wiki/SMS_language
+
+let originalLetterChance = 0.5;
+
+let letters = {
+	"A":["4", "/-\\", "/_\\", "@", "/\\"],
+	"B":["8", "|3", "13", "|}", "|:", "|8", "18", "6", "|B", "|8", "lo", "|o", "&"],
+	"C":["<", "{", "[", "("],
+	"D":["|)", "|}", "|]", "|_)"],
+	"E":["3", "[-"],
+	"F":["|=", "ph", "|#", "|\""],
+	"G":["[", "-", "[+", "6"],
+	"H":["4", "|-|", "[-]", "{-}", "|=|", "[=]", "{=}"],
+	"I":["1", "|", "!", "9"],
+	"J":["_|", "_/", "_7", "_)", "_]", "_}"],
+	"K":["|<", "1<", "l<", "|{", "l{"],
+	"L":["|_", "|", "1", "]["],
+	"M":["44", "|\\/|", "^^", "/\\/\\", "/X\\", "[]\\/][", "[]V[]", "][\\\\//][", "(V),//.", ".\\\\", "N\\"],
+	"N":["|\\|", "/\\/", "/V", "][\\\\]["],
+	"O":["0", "()", "[]", "{}", "<>"],
+	"P":["|o", "|O", "|>", "|*", "|°", "|D", "/o"],
+	"Q":["O_", "9", "(,)", "0,"],
+	"R":["|2", "12", ".-", "|^", "l2", "?"],
+	"S":["5", "$", "§"],
+	"T":["7", "+", "7`", "'|'"],
+	"U":["|_|", "\\_\\", "/_/", "\\_/", "(_)", "[_]", "{_}"],
+	"V":["\\/"],
+	"W":["\\/\\/", "(/\\)", "\\^/", "|/\\|", "\\X/", "\\\\'", "'//", "VV"],
+	"X":["%", "*", "><", "}{", ")("],
+	"Y":["`/", "¥"],
+	"Z":["2", "7_", ">_"],
+	"0":["O", "D"],
+	"1":["I", "L"],
+	"2":["Z"],
+	"3":["E"],
+	"4":["H", "A"],
+	"5":["S"],
+	"6":["b", "G"],
+	"7":["T", "L", "J"],
+	"8":["B"],
+	"9":["P"],
+};
+
+leedfyLetter = function(c){
+
+	if(Math.random() < originalLetterChance)
+		return c;
+
+	let translations = [];
+	if(letters[c.toUpperCase()] != undefined)
+		translations = letters[c.toUpperCase()];
+	
+	if(translations.length == 0)
+		translations.push(c);
+				
+	return translations[Math.floor((Math.random() * translations.length))];
+}
+
+leedfy = function(str){
+	let out = "";
+	for(c in str){
+		out += leedfyLetter(str[c]);
+	}
+	
+	return out;
+} 
+
+textChanged = function(){
+	document.getElementById('out').innerHTML = leedfy(document.getElementById('in').value);
+}
+
+</script>
+
+<div style="margin: auto; text-align: center; margin-top: 20%;">
+	<input type="text" id="in" style="
+		width: 70%; 
+		padding: 12px 20px; 
+		margin: 8px 0;  
+		border: 2px solid white; 
+		background-color: black; 
+		color: white;
+	" placeholder="Type here" onkeyup="textChanged()">
+	<div id="out" style="
+	padding-top: 5%;
+	width: 70%;
+	margin: auto;  
+	color: white;
+	font-size: 3.5em;
+	font-family: sans-serif; 
+	"></div>
+</div>
+
+</body>
+</html>
